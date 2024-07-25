@@ -5,35 +5,35 @@ export interface NavigationBarPlugin {
   /**
    * Display the navigation bar.
    */
-  show(): Promise<void>
+  show(): Promise<void>;
 
   /**
    * Hide the navigation bar.
    */
-  hide(): Promise<void>
+  hide(): Promise<void>;
 
   /**
    * Change the color of the navigation bar.
    * *Support alpha hexadecimal numbers.
-   * @param options 
+   * @param options
    */
-  setColor(options: ColorParameters): Promise<void>
+  setColor(options: ColorParameters): Promise<void>;
 
   /**
    * Set the Transparency
-   * @param isTransparent 
+   * @param isTransparent
    */
-  setTransparency(options: { isTransparent: boolean }): Promise<void>
+  setTransparency(options: { isTransparent: boolean }): Promise<void>;
 
   /**
    * Gets the current color of the navigation bar in Hexadecimal.
    */
-  getColor(): Promise<{ color: string }>
+  getColor(): Promise<{ color: string }>;
 
   /**
    * Event fired after navigation bar is displayed
    * @param event The event
-   * @param listenerFunc Callback 
+   * @param listenerFunc Callback
    */
   addListener(
     event: NavigationBarPluginEvents.SHOW,
@@ -43,7 +43,7 @@ export interface NavigationBarPlugin {
   /**
    * Event fired after navigation bar is hidden
    * @param event The event
-   * @param listenerFunc Callback 
+   * @param listenerFunc Callback
    */
   addListener(
     event: NavigationBarPluginEvents.HIDE, 
@@ -53,22 +53,37 @@ export interface NavigationBarPlugin {
   /**
    * Event fired after navigation bar color is changed
    * @param event The event
-   * @param listenerFunc Callback 
+   * @param listenerFunc Callback
    */
   addListener(
     event: NavigationBarPluginEvents.COLOR_CHANGE,
     listenerFunc: (returnObject: { color: string }) => void
-  ): Promise<PluginListenerHandle>
+  ): Promise<PluginListenerHandle>;
+
+  /**
+   * Event fired after navigation bar color is changed
+   * @param event The event
+   * @param listenerFunc Callback
+   */
+  addListener(
+    event: NavigationBarPluginEvents.IMMERSIVE_VIEW_CHANGE,
+    listenerFunc: (returnObject: { isImmersiveMode: string }) => void
+  ): PluginListenerHandle;
+
+  /**
+   * Remove all native listeners for this plugin.
+   */
+  removeAllListeners(): Promise<void>;
 }
 
 export interface ColorParameters {
   /**
    * Sets the new color of the navigation bar.
    */
-  color: string
+  color: string;
 
   /**
    * Sets whether the default navigation bar buttons should be black or white.
    */
-  darkButtons?: boolean
+  darkButtons?: boolean;
 }

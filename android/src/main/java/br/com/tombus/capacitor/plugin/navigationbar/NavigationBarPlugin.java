@@ -22,6 +22,28 @@ public class NavigationBarPlugin extends Plugin {
     private NavigationBar implementation = new NavigationBar();
     private Boolean isTransparent = false;
     private int currentColor = Color.BLACK;
+
+    @Override
+    public void load() {
+        execute(
+                () -> {
+                    View decorView = getActivity().getWindow().getDecorView();
+                    decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+                        @Override
+                        public void onSystemUiVisibilityChange(int visibility) {
+                            if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                                // The system bars are visible
+                                notifyListeners("onImmersiveModeChange", new JSObject().put("isImmersiveMode", false));
+                            } else {
+                                // The system bars are hidden
+                                notifyListeners("onImmersiveModeChange", new JSObject().put("isImmersiveMode", true));
+                            }
+                        }
+                    });
+                }
+        );
+    }
+    
     @PluginMethod
     public void hide(PluginCall call) {
         this.getActivity().runOnUiThread(() -> {

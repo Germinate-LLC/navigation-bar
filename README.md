@@ -1,41 +1,27 @@
 <p align="center"><br><img src="https://user-images.githubusercontent.com/236501/85893648-1c92e880-b7a8-11ea-926d-95355b8175c7.png" width="128" height="128" /></p>
 <h3 align="center">Navigation Bar</h3>
-<p align="center"><strong><code>@hugotomazi/capacitor-navigation-bar</code></strong></p>
+<p align="center"><strong><code>@mauricewegner/capacitor-navigation-bar</code></strong></p>
 <p align="center">
   Capacitor plugin for Navigation Bar manipulation.
 </p>
 
-<p align="center">
+<p align="center"
   <img src="https://img.shields.io/maintenance/yes/2024?style=flat-square" />
   <a href="https://github.com/hugotomazi/navigation-bar/actions?query=workflow%3A%22CI%22"><img src="https://img.shields.io/github/workflow/status/hugotomazi/navigation-bar/CI/master?style=flat-square" /></a>
   <a href="https://www.npmjs.com/package/@hugotomazi/capacitor-navigation-bar"><img src="https://img.shields.io/npm/l/@hugotomazi/capacitor-navigation-bar?style=flat-square" /></a>
 <br>
-  <a href="https://www.npmjs.com/package/@hugotomazi/capacitor-navigation-bar"><img src="https://img.shields.io/npm/dw/@hugotomazi/capacitor-navigation-bar?style=flat-square" /></a>
-  <a href="https://www.npmjs.com/package/@hugotomazi/capacitor-navigation-bar"><img src="https://img.shields.io/npm/v/@hugotomazi/capacitor-navigation-bar?style=flat-square" /></a>
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-<a href="#contributors-"><img src="https://img.shields.io/badge/all%20contributors-5-orange?style=flat-square" /></a>
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-<br/>
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F9VPVZKHK4SZW">
-  <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="Donate with PayPal button">
-</a>
+  <a href="https://www.npmjs.com/package/@mauricewegner/capacitor-navigation-bar"><img src="https://img.shields.io/npm/dw/@mauricewegner/capacitor-navigation-bar?style=flat-square" /></a>
+  <a href="https://www.npmjs.com/package/@mauricewegner/capacitor-navigation-bar"><img src="https://img.shields.io/npm/v/@mauricewegner/capacitor-navigation-bar?style=flat-square" /></a>
 </p>
 <br/>
 <p align="center">
-  <img height="450" src="https://github.com/hugotomazi/navigation-bar/blob/master/demoProject/src/assets/example.gif?raw=true">
+  <img height="450" src="https://github.com/mauricewegner/navigation-bar/blob/master/demoProject/src/assets/example.gif?raw=true">
 </p>
-
-## Maintainers
-
-| Maintainer  | GitHub                                      | Social                                                          |
-| ----------- | ------------------------------------------- | --------------------------------------------------------------- |
-| Hugo Tomazi | [hugotomazi](https://github.com/hugotomazi) | [@hugotomazi](https://br.linkedin.com/in/hugo-tomazi-299034101) |
-
 
 ## Install
 
 ```bash
-npm install @hugotomazi/capacitor-navigation-bar
+npm install @mauricewegner/capacitor-navigation-bar
 npx cap sync
 ```
 
@@ -52,9 +38,11 @@ No configuration required for this plugin.
 * [`setColor(...)`](#setcolor)
 * [`setTransparency(...)`](#settransparency)
 * [`getColor()`](#getcolor)
-* [`addListener(...)`](#addlistener)
-* [`addListener(...)`](#addlistener)
-* [`addListener(...)`](#addlistener)
+* [`addListener(NavigationBarPluginEvents.SHOW, ...)`](#addlistenernavigationbarplugineventsshow)
+* [`addListener(NavigationBarPluginEvents.HIDE, ...)`](#addlistenernavigationbarplugineventshide)
+* [`addListener(NavigationBarPluginEvents.COLOR_CHANGE, ...)`](#addlistenernavigationbarplugineventscolor_change)
+* [`addListener(NavigationBarPluginEvents.IMMERSIVE_VIEW_CHANGE, ...)`](#addlistenernavigationbarplugineventsimmersive_view_change)
+* [`removeAllListeners()`](#removealllisteners)
 * [Interfaces](#interfaces)
 * [Enums](#enums)
 
@@ -129,7 +117,7 @@ Gets the current color of the navigation bar in Hexadecimal.
 --------------------
 
 
-### addListener(...)
+### addListener(NavigationBarPluginEvents.SHOW, ...)
 
 ```typescript
 addListener(event: NavigationBarPluginEvents.SHOW, listenerFunc: () => void) => Promise<PluginListenerHandle>
@@ -147,7 +135,7 @@ Event fired after navigation bar is displayed
 --------------------
 
 
-### addListener(...)
+### addListener(NavigationBarPluginEvents.HIDE, ...)
 
 ```typescript
 addListener(event: NavigationBarPluginEvents.HIDE, listenerFunc: () => void) => Promise<PluginListenerHandle>
@@ -165,7 +153,7 @@ Event fired after navigation bar is hidden
 --------------------
 
 
-### addListener(...)
+### addListener(NavigationBarPluginEvents.COLOR_CHANGE, ...)
 
 ```typescript
 addListener(event: NavigationBarPluginEvents.COLOR_CHANGE, listenerFunc: (returnObject: { color: string; }) => void) => Promise<PluginListenerHandle>
@@ -179,6 +167,35 @@ Event fired after navigation bar color is changed
 | **`listenerFunc`** | <code>(returnObject: { color: string; }) =&gt; void</code>                                   | Callback    |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+
+--------------------
+
+
+### addListener(NavigationBarPluginEvents.IMMERSIVE_VIEW_CHANGE, ...)
+
+```typescript
+addListener(event: NavigationBarPluginEvents.IMMERSIVE_VIEW_CHANGE, listenerFunc: (returnObject: { isImmersiveMode: string; }) => void) => PluginListenerHandle
+```
+
+Event fired after navigation bar color is changed
+
+| Param              | Type                                                                                                  | Description |
+| ------------------ | ----------------------------------------------------------------------------------------------------- | ----------- |
+| **`event`**        | <code><a href="#navigationbarpluginevents">NavigationBarPluginEvents.IMMERSIVE_VIEW_CHANGE</a></code> | The event   |
+| **`listenerFunc`** | <code>(returnObject: { isImmersiveMode: string; }) =&gt; void</code>                                  | Callback    |
+
+**Returns:** <code><a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+
+--------------------
+
+
+### removeAllListeners()
+
+```typescript
+removeAllListeners() => Promise<void>
+```
+
+Remove all native listeners for this plugin.
 
 --------------------
 
@@ -206,10 +223,11 @@ Event fired after navigation bar color is changed
 
 #### NavigationBarPluginEvents
 
-| Members            | Value                        | Description                                  |
-| ------------------ | ---------------------------- | -------------------------------------------- |
-| **`SHOW`**         | <code>'onShow'</code>        | Called after the navigation bar is displayed |
-| **`HIDE`**         | <code>'onHide'</code>        | Called after navigation bar is hidden        |
-| **`COLOR_CHANGE`** | <code>'onColorChange'</code> | Called after navigation bar color is changed |
+| Members                     | Value                                | Description                                  |
+| --------------------------- | ------------------------------------ | -------------------------------------------- |
+| **`SHOW`**                  | <code>'onShow'</code>                | Called after the navigation bar is displayed |
+| **`HIDE`**                  | <code>'onHide'</code>                | Called after navigation bar is hidden        |
+| **`COLOR_CHANGE`**          | <code>'onColorChange'</code>         | Called after navigation bar color is changed |
+| **`IMMERSIVE_VIEW_CHANGE`** | <code>'onImmersiveModeChange'</code> |                                              |
 
 </docgen-api>
